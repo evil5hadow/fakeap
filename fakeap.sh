@@ -4,10 +4,10 @@ trap 'stop;exit 1' 2
 stop() {
 
 printf "Killing all conections..\n" 
-killall dnsmasq hostapd
+killall dnsmasq hostapd > /dev/null 2>&1
 sleep 4
-printf "Restart Network-Manager..\n" 
-service networt-manager restart
+printf "Restarting Network-Manager..\n" 
+service network-manager restart
 sleep 3
 
 }
@@ -29,7 +29,7 @@ read -p 'SSID to use:' use_ssid
 read -p 'Channel to use:' use_channel
 printf "Killing all conections..\n" 
 sleep 2
-killall network-manager hostapd dnsmasq wpa_supplicant dhcpd
+killall network-manager hostapd dnsmasq wpa_supplicant dhcpd > /dev/null 2>&1
 sleep 5
 printf "interface=%s\n" $choosed_interface > hostapd.conf
 printf "driver=nl80211\n" >> hostapd.conf
@@ -53,6 +53,7 @@ printf "listen-address=127.0.0.1\n" >> dnsmasq.conf
 
 dnsmasq -C dnsmasq.conf -d &
 
+printf "To Stop: ./fakeap.sh --stop\n"
 }
 
 case "$1" in --stop) stop ;; *)
