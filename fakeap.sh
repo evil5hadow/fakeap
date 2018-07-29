@@ -59,6 +59,7 @@ printf "server=8.8.8.8\n" >> dnsmasq.conf
 printf "log-queries\n" >> dnsmasq.conf
 printf "log-dhcp\n" >> dnsmasq.conf
 printf "listen-address=127.0.0.1\n" >> dnsmasq.conf
+printf "address=/#/192.168.1.1\n" >> dnsmasq.conf
 ifconfig wlan0 up 192.168.1.1 netmask 255.255.255.0
 sleep 1
 route add -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.1.1
