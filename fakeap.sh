@@ -1,4 +1,18 @@
 #Fake-AP Beta, Author @thelinuxchoice
+trap 'stop;exit 1' 2
+
+stop() {
+
+printf "Killing all conections..\n" 
+killall dnsmasq hostapd
+sleep 4
+printf "Restart Network-Manager..\n" 
+service networt-manager restart
+sleep 3
+
+}
+
+start() {
 interface=$(ifconfig -a | sed 's/[ \t].*//;/^$/d' | tr -d ':' > iface)
 
 
@@ -15,8 +29,8 @@ read -p 'SSID to use:' use_ssid
 read -p 'Channel to use:' use_channel
 printf "Killing all conections..\n" 
 sleep 2
-killall network-manager dnsmasq wpa_supplicant dhcpd
-
+killall network-manager hostapd dnsmasq wpa_supplicant dhcpd
+sleep 5
 printf "interface=%s\n" $choosed_interface > hostapd.conf
 printf "driver=nl80211\n" >> hostapd.conf
 printf "ssid=%s\n" $use_ssid >> hostapd.conf
@@ -27,7 +41,7 @@ printf "auth_algs=1\n" >> hostapd.conf
 printf "ignore_broadcast_ssid=0\n" >> hostapd.conf
 
 hostapd hostapd.conf &
-
+sleep 5
 printf "interface=%s\n" $use_interface > dnsmasq.conf
 printf "dhcp-range=192.168.1.2,192.168.1.30,255.255.255.0,12h\n" >> dnsmasq.conf
 printf "dhcp-option=3,192.168.1.1\n" >> dnsmasq.conf
@@ -39,7 +53,11 @@ printf "listen-address=127.0.0.1\n" >> dnsmasq.conf
 
 dnsmasq -C dnsmasq.conf -d &
 
+}
 
+case "$1" in --stop) stop ;; *)
+start
+esac
 
 
 
