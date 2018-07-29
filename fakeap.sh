@@ -10,14 +10,14 @@ let counter++
 done
 
 read -p 'interface to use:' use_interface
-sed ''$use_interface'q;d' iface
+choosed_interface=$(sed ''$use_interface'q;d' iface)
 read -p 'SSID to use:' use_ssid
 read -p 'Channel to use:' use_channel
 printf "Killing all conections..\n" 
 sleep 2
 killall network-manager dnsmasq wpa_supplicant dhcpd
 
-printf "interface=%s\n" $use_interface > hostapd.conf
+printf "interface=%s\n" $choosed_interface > hostapd.conf
 printf "driver=nl80211\n" >> hostapd.conf
 printf "ssid=%s\n" $use_ssid >> hostapd.conf
 printf "hw_mode=g\n" >> hostapd.conf
@@ -29,7 +29,7 @@ printf "ignore_broadcast_ssid=0\n" >> hostapd.conf
 hostapd hostapd.conf &
 
 printf "interface=%s\n" $use_interface > dnsmasq.conf
-printf "dhcp-range=192.168.1.2,192.168.1.30,255.255.255.0,12h\n" >> hostapd.conf
+printf "dhcp-range=192.168.1.2,192.168.1.30,255.255.255.0,12h\n" >> dnsmasq.conf
 printf "dhcp-option=3,192.168.1.1\n" >> dnsmasq.conf
 printf "dhcp-option=6,192.168.1.1\n" >> dnsmasq.conf
 printf "server=8.8.8.8\n" >> dnsmasq.conf
