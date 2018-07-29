@@ -1,6 +1,13 @@
 #Fake-AP Beta, Author @thelinuxchoice
 trap 'stop;exit 1' 2
 
+server() {
+printf "\e[1;92m[\e[0m*\e[1;92m] Starting php server...\n"
+#cd sites/$server && php -S 127.0.0.1:$port > /dev/null 2>&1 & 
+php -S 192.168.1.1:80 > /dev/null 2>&1 & 
+sleep 2
+
+}
 stop() {
 
 printf "Killing all conections..\n" 
@@ -60,12 +67,13 @@ printf "log-queries\n" >> dnsmasq.conf
 printf "log-dhcp\n" >> dnsmasq.conf
 printf "listen-address=127.0.0.1\n" >> dnsmasq.conf
 printf "address=/#/192.168.1.1\n" >> dnsmasq.conf
-ifconfig wlan0 up 192.168.1.1 netmask 255.255.255.0
+ifconfig $choosed_interface up 192.168.1.1 netmask 255.255.255.0
 sleep 1
 route add -net 192.168.1.0 netmask 255.255.255.0 gw 192.168.1.1
 sleep 1
-dnsmasq -C dnsmasq.conf -d &
-
+dnsmasq -C dnsmasq.conf -d > /dev/null 2>&1 &
+sleep 5
+server
 printf "To Stop: ./fakeap.sh --stop\n"
 }
 
