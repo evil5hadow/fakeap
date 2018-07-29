@@ -1,4 +1,5 @@
-#Fake-AP Beta, Author @thelinuxchoice
+# Fake-AP v1.0, Author @thelinuxchoice (You dont become coder by just changing the credits)
+# github: https://github.com/thelinuxchoice/fakeap
 trap 'printf "\n";stop;exit 1' 2
 
 dependencies() {
@@ -11,21 +12,21 @@ command -v hostapd > /dev/null 2>&1 || { echo >&2 "I require hostapd but it's no
 
 banner()  {
 
-printf "8888888888       888                           d8888 8888888b. \n" 
-printf "888              888                          d88888 888   Y88b \n"
-printf "888              888                         d88P888 888    888 \n"
-printf "8888888  8888b.  888  888  .d88b.           d88P 888 888   d88P \n"
-printf "888          88b 888 .88P d8P  Y8b         d88P  888 8888888P  \n"
-printf "888     .d888888 888888K  88888888 888888 d88P   888 888        \n"
-printf "888     888  888 888  88b Y8b.           d8888888888 888        \n"
-printf "888      Y888888 888  888   Y8888       d88P     888 888        \n"
+printf "\e[1;77m8888888888       888                           \e[0m\e[1;92m[d8888 8888888b. \e[0m\n" 
+printf "\e[1;77m888              888                          \e[0m\e[1;92md88888 888   Y88b \e[0m\n"
+printf "\e[1;77m888              888                         \e[0m\e[1;92md88P888 888    888 \e[0m\n"
+printf "\e[1;77m8888888  8888b.  888  888  .d88b.           \e[0m\e[1;92md88P 888 888   d88P \e[0m\n"
+printf "\e[1;77m888          88b 888 .88P d8P  Y8b         \e[0m\e[1;92md88P  888 8888888P  \e[0m\n"
+printf "\e[1;77m888     .d888888 888888K  88888888 888888 \e[0m\e[1;92md88P   888 888        \e[0m\n"
+printf "\e[1;77m888     888  888 888  88b Y8b.           \e[0m\e[1;92md8888888888 888        \e[0m\n"
+printf "\e[1;77m888      Y888888 888  888   Y8888       \e[0m\e[1;92md88P     888 888\e[0m\e[1;77m v1.0\e[0m\n"
 printf "\n"
-printf "                   .-  _           _  -. \n"
+printf "\e[1;31m                   .-  _           _  -. \n"
 printf "                  /   /             \   \ \n"
 printf "                 (   (  (\` (-o-) \`)  )   ) \n"
 printf "                  \   \_ \`  -+-  \` _/   / \n"
 printf "                   \`-       -+-       -\` \n"
-printf "                            -+- Coded by: @thelinuxchoice\n"
+printf "                            -+- \e[0m\e[1;77mCoded by: @thelinuxchoice\e[0m\n"
 printf "\n"
 
 }
