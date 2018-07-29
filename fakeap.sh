@@ -42,7 +42,7 @@ printf "ignore_broadcast_ssid=0\n" >> hostapd.conf
 
 hostapd hostapd.conf &
 sleep 5
-printf "interface=%s\n" $use_interface > dnsmasq.conf
+printf "interface=%s\n" $choosed_interface > dnsmasq.conf
 printf "dhcp-range=192.168.1.2,192.168.1.30,255.255.255.0,12h\n" >> dnsmasq.conf
 printf "dhcp-option=3,192.168.1.1\n" >> dnsmasq.conf
 printf "dhcp-option=6,192.168.1.1\n" >> dnsmasq.conf
